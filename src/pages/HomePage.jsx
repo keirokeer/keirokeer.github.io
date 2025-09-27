@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import BackgroundNoise from '../components/BackgroundNoise';
+import siteConfig from '../config/settings';
 import './HomePage.css';
 
 function HomePage() {
   const [avatarLoaded, setAvatarLoaded] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
 
-  const githubAvatarUrl = 'https://github.com/keirokeer.png?size=200';
+  const githubAvatarUrl = `https://github.com/${siteConfig.username}.png?size=200`;
   const fallbackAvatar = '/avatar.webp';
   
   const handleImageLoad = () => {
@@ -17,6 +18,83 @@ function HomePage() {
   const handleImageError = () => {
     setAvatarError(true);
     setAvatarLoaded(true);
+  };
+
+  const getPlatformDisplayName = (platform) => {
+    const platformNames = {
+      youtube: 'YouTube',
+      soundcloud: 'SoundCloud',
+      twitter: 'X / Twitter',
+      tiktok: 'TikTok',
+      vk: 'VK',
+      deviantart: 'DeviantArt',
+      artstation: 'ArtStation',
+      furaffinity: 'Fur Affinity',
+      github: 'GitHub',
+      lavatop: 'Lava.top',
+      paypal: 'PayPal',
+      bluesky: 'Bluesky',
+      twitch: 'Twitch',
+      telegram: 'Telegram',
+      pinterest: 'Pinterest',
+      instagram: 'Instagram',
+      facebook: 'Facebook',
+      boosty: 'Boosty',
+      discord: 'Discord'
+    };
+    
+    return platformNames[platform] || platform.charAt(0).toUpperCase() + platform.slice(1);
+  };
+
+  const renderPrimaryButton = () => {
+    const { primaryButton } = siteConfig;
+    
+    if (primaryButton.type === 'external' && primaryButton.url) {
+      return (
+        <a href={primaryButton.url} 
+           className="btn btn-primary" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          {primaryButton.name}
+        </a>
+      );
+    } else {
+      return (
+        <Link to="/commissions" className="btn btn-primary">
+          {primaryButton.name}
+        </Link>
+      );
+    }
+  };
+
+  const renderPlatforms = () => {
+    const platforms = [];
+    
+    Object.entries(siteConfig.platforms).forEach(([platform, value]) => {
+      if (!value) return;
+      
+      const displayName = getPlatformDisplayName(platform);
+      
+      if (platform === 'discord') {
+        platforms.push(
+          <div key={platform} className={`platform-link ${platform}`}>
+            Discord: {value}
+          </div>
+        );
+      } else {
+        platforms.push(
+          <a key={platform} 
+             href={value} 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             className={`platform-link ${platform}`}>
+            {displayName}
+          </a>
+        );
+      }
+    });
+    
+    return platforms;
   };
 
   return (
@@ -30,7 +108,7 @@ function HomePage() {
               <div className="avatar-container">
                 <img 
                   src={avatarError ? fallbackAvatar : githubAvatarUrl}
-                  alt="keirokeer" 
+                  alt={siteConfig.content.name} 
                   className={`avatar ${avatarLoaded ? 'loaded' : 'loading'}`}
                   onLoad={handleImageLoad}
                   onError={handleImageError}
@@ -40,72 +118,29 @@ function HomePage() {
             </div>
           </div>
           
-          <h1 className="name">keirokeer</h1>
-          <p className="bio">
-            Audio engineer, content creator & voice synthesis enthusiast.
-            Creator/voice of KEIRO and founder of LUNAI Project (DiffSinger virtual performers).
-            OpenUtau contributor.
-            Commissions open.
-          </p>
+          <h1 className="name">{siteConfig.content.name}</h1>
+          <p className="bio">{siteConfig.content.bio}</p>
           
           <div className="buttons-main">
-            <Link to="/commissions" className="btn btn-primary">
-              Commissions
-            </Link>
+            {renderPrimaryButton()}
           </div>
 
           <div className="buttons-row">
-            <a href="https://www.mediafire.com/folder/hzd1w9m2e176q/keirokeer_USTs" 
-               className="btn btn-platform" 
-               target="_blank" 
-               rel="noopener noreferrer">
-              USTs / SVPs
-            </a>
-            
-            <a href="https://lunaiproject.github.io/" 
-               className="btn btn-platform" 
-               target="_blank" 
-               rel="noopener noreferrer">
-              LUNAI Project
-            </a>
+            {siteConfig.mainButtons.map((button, index) => (
+              <a key={index}
+                 href={button.url} 
+                 className="btn btn-platform" 
+                 target="_blank" 
+                 rel="noopener noreferrer">
+                {button.name}
+              </a>
+            ))}
           </div>
           
           <div className="platforms-section">
             <p className="platforms-title">My Platforms</p>
             <div className="platforms-grid">
-              <a href="https://www.youtube.com/c/keirokeer" 
-                 target="_blank" 
-                 rel="noopener noreferrer" 
-                 className="platform-link youtube">
-                YouTube
-              </a>
-              <a href="https://soundcloud.com/keirokeer" 
-                 target="_blank" 
-                 rel="noopener noreferrer" 
-                 className="platform-link soundcloud">
-                SoundCloud
-              </a>
-              <a href="https://x.com/keirokeer" 
-                 target="_blank" 
-                 rel="noopener noreferrer" 
-                 className="platform-link twitter">
-                X (Twitter)
-              </a>
-              <a href="https://github.com/keirokeer" 
-                 target="_blank" 
-                 rel="noopener noreferrer" 
-                 className="platform-link github">
-                GitHub
-              </a>
-              <a href="https://boosty.to/keirokeer" 
-                 target="_blank" 
-                 rel="noopener noreferrer" 
-                 className="platform-link boosty">
-                Boosty
-              </a>
-              <div className="platform-link discord">
-                Discord: keirokeer
-              </div>
+              {renderPlatforms()}
             </div>
           </div>
         </div>

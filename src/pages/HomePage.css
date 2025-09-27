@@ -33,6 +33,10 @@
   --border-radius: 35px;
   --border-radius-sm: 15px;
   --shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  
+  --btn-primary-normal: var(--orange);
+  --btn-primary-hover: var(--orange-light);
+  --btn-platform-hover: var(--orange-light);
 }
 
 * {
@@ -181,16 +185,16 @@ body {
 }
 
 .btn-primary {
-  background: var(--orange);
-  border-color: var(--orange);
+  background: var(--btn-primary-normal);
+  border-color: var(--btn-primary-normal);
   font-weight: 600;
   font-size: 1.1rem;
   padding: 18px 32px;
 }
 
 .btn-primary:hover {
-  background: var(--orange-light);
-  border-color: var(--orange-light);
+  background: var(--btn-primary-hover);
+  border-color: var(--btn-primary-hover);
 }
 
 .btn-platform {
@@ -201,7 +205,7 @@ body {
 
 .btn-platform:hover {
   background: var(--bg-secondary);
-  border-color: var(--orange-light);
+  border-color: var(--btn-platform-hover);
 }
 
 .platforms-section {
@@ -265,6 +269,94 @@ body {
   color: #1da1f2;
 }
 
+.platform-link.bluesky {
+  border-color: var(--border-color);
+}
+.platform-link.bluesky:hover {
+  border-color: #0085ff;
+  color: #0085ff;
+}
+
+.platform-link.tiktok {
+  border-color: var(--border-color);
+}
+.platform-link.tiktok:hover {
+  border-color: #ff0050;
+  color: #ff0050;
+}
+
+.platform-link.twitch {
+  border-color: var(--border-color);
+}
+.platform-link.twitch:hover {
+  border-color: #9146ff;
+  color: #9146ff;
+}
+
+.platform-link.vk {
+  border-color: var(--border-color);
+}
+.platform-link.vk:hover {
+  border-color: #0077ff;
+  color: #0077ff;
+}
+
+.platform-link.telegram {
+  border-color: var(--border-color);
+}
+.platform-link.telegram:hover {
+  border-color: #0088cc;
+  color: #0088cc;
+}
+
+.platform-link.deviantart {
+  border-color: var(--border-color);
+}
+.platform-link.deviantart:hover {
+  border-color: #05cc47;
+  color: #05cc47;
+}
+
+.platform-link.artstation {
+  border-color: var(--border-color);
+}
+.platform-link.artstation:hover {
+  border-color: #13aff0;
+  color: #13aff0;
+}
+
+.platform-link.furaffinity {
+  border-color: var(--border-color);
+}
+.platform-link.furaffinity:hover {
+  border-color: #ff7e00;
+  color: #ff7e00;
+}
+
+.platform-link.pinterest {
+  border-color: var(--border-color);
+}
+.platform-link.pinterest:hover {
+  border-color: #e60023;
+  color: #e60023;
+}
+
+.platform-link.instagram {
+  border-color: var(--border-color);
+}
+.platform-link.instagram:hover {
+  border-color: #e4405f;
+  color: #e4405f;
+}
+
+.platform-link.facebook {
+  border-color: var(--border-color);
+}
+.platform-link.facebook:hover {
+  border-color: #1877f2;
+  color: #1877f2;
+}
+
 .platform-link.github {
   border-color: var(--border-color);
 }
@@ -279,6 +371,22 @@ body {
 .platform-link.boosty:hover {
   border-color: #ff6b35;
   color: #ff6b35;
+}
+
+.platform-link.lavatop {
+  border-color: var(--border-color);
+}
+.platform-link.lavatop:hover {
+  border-color: #5865f2;
+  color: #5865f2;
+}
+
+.platform-link.paypal {
+  border-color: var(--border-color);
+}
+.platform-link.paypal:hover {
+  border-color: #1877f2;
+  color: #1877f2;
 }
 
 .platform-link.discord {
