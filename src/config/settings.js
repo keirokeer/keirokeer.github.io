@@ -3,13 +3,10 @@ export const siteConfig = {
   username: 'keirokeer', // Ваш никнейм на GitHub (с него будет подгружаться аватарка)
   
   // Никнейм и описание
-  // Для переноса на следующую строку используйте \n
+  // Для переноса на следующую строку используйте Enter или напишите \n
   content: {
     name: 'keirokeer',
-    bio: `Audio engineer, content creator & voice synthesis enthusiast.
-Creator/voice of KEIRO and founder of LUNAI Project (DiffSinger virtual performers).
-OpenUtau contributor.
-Commissions open.`,
+    bio: `Audio engineer, content creator & voice synthesis enthusiast. Creator/voice of KEIRO and founder of LUNAI Project (DiffSinger virtual performers). OpenUtau contributor. Commissions open.`,
   },
   
   // Цветовая схема кнопок

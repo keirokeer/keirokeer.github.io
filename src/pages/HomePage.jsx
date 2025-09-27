@@ -20,6 +20,15 @@ function HomePage() {
     setAvatarLoaded(true);
   };
 
+  const formatBio = (text) => {
+    return text.split('\n').map((line, index) => (
+      <span key={index}>
+        {line}
+        {index < text.split('\n').length - 1 && <br />}
+      </span>
+    ));
+  };
+
   const getPlatformDisplayName = (platform) => {
     const platformNames = {
       youtube: 'YouTube',
@@ -119,7 +128,7 @@ function HomePage() {
           </div>
           
           <h1 className="name">{siteConfig.content.name}</h1>
-          <p className="bio">{siteConfig.content.bio}</p>
+          <p className="bio">{formatBio(siteConfig.content.bio)}</p>
           
           <div className="buttons-main">
             {renderPrimaryButton()}
