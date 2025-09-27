@@ -1,13 +1,24 @@
 :root {
   --cream: #e8d8c9;
-  --cream-light: #f0e6dc;
-  --cream-dark: #d4c4b0;
-  --slate-blue: #2e5083;
-  --slate-blue-light: #516e99;
-  --slate-blue-dark: #304768;
-  --orange: #f3701e;
-  --orange-light: #ff8a3d;
-  --orange-dark: #d45a0c;
+  --brown: #a56740;
+  --red: #631b25;
+  --red-light: #af2b3c;
+  --orange: #a55625;
+  --orange-light: #f3701e;
+  --green: #246b36;
+  --green-light: #246b36;
+  --mint: #227052;
+  --mint-light: #1ea571;
+  --blue: #2e5083;
+  --blue-light: #3970c2;
+  --violet: #3e2c80;
+  --violet-light: #4f2ad3;
+  --purple: #5f2779;
+  --purple-light: #9025c2;
+  --pink: #7e355d;
+  --pink-light: #c04f8d;
+  --cherry: #5e1726;
+  --cherry-light: #9c1734;
   
   --bg-primary: #121212;
   --bg-secondary: #1e1e1e;
@@ -170,16 +181,16 @@ body {
 }
 
 .btn-primary {
-  background: var(--slate-blue);
-  border-color: var(--slate-blue);
+  background: var(--orange);
+  border-color: var(--orange);
   font-weight: 600;
   font-size: 1.1rem;
   padding: 18px 32px;
 }
 
 .btn-primary:hover {
-  background: var(--orange);
-  border-color: var(--orange);
+  background: var(--orange-light);
+  border-color: var(--orange-light);
 }
 
 .btn-platform {
@@ -190,7 +201,7 @@ body {
 
 .btn-platform:hover {
   background: var(--bg-secondary);
-  border-color: var(--orange);
+  border-color: var(--orange-light);
 }
 
 .platforms-section {
