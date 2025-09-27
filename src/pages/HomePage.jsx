@@ -1,16 +1,97 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BackgroundNoise from '../components/BackgroundNoise';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 import siteConfig from '../config/settings';
+import transcriptionsRu from '../config/transcriptions-ru';
+import transcriptionsFr from '../config/transcriptions-fr';
+import transcriptionsJa from '../config/transcriptions-ja';
+import transcriptionsKo from '../config/transcriptions-ko';
+import transcriptionsZh from '../config/transcriptions-zh';
+import transcriptionsPtBr from '../config/transcriptions-pt-br';
+import transcriptionsEs from '../config/transcriptions-es';
+import transcriptionsIt from '../config/transcriptions-it';
+import transcriptionsSr from '../config/transcriptions-sr';
 import './HomePage.css';
 
 function HomePage() {
   const [avatarLoaded, setAvatarLoaded] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
+  const [currentLang, setCurrentLang] = useState(siteConfig.language.default);
 
   const githubAvatarUrl = `https://github.com/${siteConfig.username}.png?size=200`;
   const fallbackAvatar = '/avatar.webp';
-  
+
+  const getTranslation = (key) => {
+    if (currentLang === 'en') {
+      if (key === 'bio') return siteConfig.content.bio;
+      if (key === 'commissions') return siteConfig.primaryButton.name;
+      if (key === 'myPlatforms') return 'My Platforms';
+    }
+    
+    if (currentLang === 'ru') {
+      if (key === 'bio') return transcriptionsRu.bio;
+      if (key === 'commissions') return transcriptionsRu.commissions;
+      if (key === 'myPlatforms') return transcriptionsRu.myPlatforms;
+    }
+    
+    if (currentLang === 'fr') {
+      if (key === 'bio') return transcriptionsFr.bio;
+      if (key === 'commissions') return transcriptionsFr.commissions;
+      if (key === 'myPlatforms') return transcriptionsFr.myPlatforms;
+    }
+    
+    if (currentLang === 'ja') {
+      if (key === 'bio') return transcriptionsJa.bio;
+      if (key === 'commissions') return transcriptionsJa.commissions;
+      if (key === 'myPlatforms') return transcriptionsJa.myPlatforms;
+    }
+    
+    if (currentLang === 'ko') {
+      if (key === 'bio') return transcriptionsKo.bio;
+      if (key === 'commissions') return transcriptionsKo.commissions;
+      if (key === 'myPlatforms') return transcriptionsKo.myPlatforms;
+    }
+    
+    if (currentLang === 'zh') {
+      if (key === 'bio') return transcriptionsZh.bio;
+      if (key === 'commissions') return transcriptionsZh.commissions;
+      if (key === 'myPlatforms') return transcriptionsZh.myPlatforms;
+    }
+    
+    if (currentLang === 'pt-br') {
+      if (key === 'bio') return transcriptionsPtBr.bio;
+      if (key === 'commissions') return transcriptionsPtBr.commissions;
+      if (key === 'myPlatforms') return transcriptionsPtBr.myPlatforms;
+    }
+    
+    if (currentLang === 'es') {
+      if (key === 'bio') return transcriptionsEs.bio;
+      if (key === 'commissions') return transcriptionsEs.commissions;
+      if (key === 'myPlatforms') return transcriptionsEs.myPlatforms;
+    }
+    
+    if (currentLang === 'it') {
+      if (key === 'bio') return transcriptionsIt.bio;
+      if (key === 'commissions') return transcriptionsIt.commissions;
+      if (key === 'myPlatforms') return transcriptionsIt.myPlatforms;
+    }
+    
+    if (currentLang === 'sr') {
+      if (key === 'bio') return transcriptionsSr.bio;
+      if (key === 'commissions') return transcriptionsSr.commissions;
+      if (key === 'myPlatforms') return transcriptionsSr.myPlatforms;
+    }
+    
+    if (key === 'bio') return siteConfig.content.bio;
+    if (key === 'commissions') return siteConfig.primaryButton.name;
+    return 'My Platforms';
+  };
+
+  const handleLanguageChange = (lang) => {
+    setCurrentLang(lang);
+  };
+
   const handleImageLoad = () => {
     setAvatarLoaded(true);
   };
@@ -57,6 +138,7 @@ function HomePage() {
 
   const renderPrimaryButton = () => {
     const { primaryButton } = siteConfig;
+    const buttonText = getTranslation('commissions');
     
     if (primaryButton.type === 'external' && primaryButton.url) {
       return (
@@ -64,13 +146,13 @@ function HomePage() {
            className="btn btn-primary" 
            target="_blank" 
            rel="noopener noreferrer">
-          {primaryButton.name}
+          {buttonText}
         </a>
       );
     } else {
       return (
         <Link to="/commissions" className="btn btn-primary">
-          {primaryButton.name}
+          {buttonText}
         </Link>
       );
     }
@@ -109,6 +191,7 @@ function HomePage() {
   return (
     <div className="home-page">
       <BackgroundNoise />
+      <LanguageSwitcher onLanguageChange={handleLanguageChange} />
       <div className="container">
         <div className="profile-card">
           <div className="banner-container">
@@ -128,7 +211,7 @@ function HomePage() {
           </div>
           
           <h1 className="name">{siteConfig.content.name}</h1>
-          <p className="bio">{formatBio(siteConfig.content.bio)}</p>
+          <p className="bio">{formatBio(getTranslation('bio'))}</p>
           
           <div className="buttons-main">
             {renderPrimaryButton()}
@@ -147,7 +230,7 @@ function HomePage() {
           </div>
           
           <div className="platforms-section">
-            <p className="platforms-title">My Platforms</p>
+            <p className="platforms-title">{getTranslation('myPlatforms')}</p>
             <div className="platforms-grid">
               {renderPlatforms()}
             </div>
